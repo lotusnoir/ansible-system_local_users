@@ -1,10 +1,10 @@
 ---
 - name: "Add Redhat tasks"
-  include: setup-Redhat.yml
+  import_tasks: setup-Redhat.yml
   when: ansible_os_family == 'Redhat' or ansible_os_family == 'Rocky'
 
 - name: "Add Debian tasks"
-  include: setup-Debian.yml
+  import_tasks: setup-Debian.yml
   when: ansible_os_family == 'Debian'
 
 - name: "Set passwordless on sudo"
