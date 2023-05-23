@@ -1,10 +1,12 @@
 ---
-global_sudo_nopwd: true
-local_groups:
-  - sudo
-
-local_users:
-  - name: "testuser"
-    groups: "sudo"
-    ssh_keys:
-      - "ssh-ed25519 AJFN!&FKTE5AAAAIIoNQBADJSBq6x5KIPIAAMwAtvITIhfi5aJiy mysuperkey"
+#local_groups:
+#  - sudo
+#
+#local_users:
+#  - name: "testuser2"
+#    shell: "/bin/bash"
+#    home: /tmp
+#    password: StrongPass
+#    groups: "sudo"
+#    ssh_keys:
+#      - "ssh-ed25519 AJFN!&FKTE5AAAAIIoNQBADJSBq6x5KIPIAAMwAtvITIhfi5aJiy mysuperkey"

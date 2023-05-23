@@ -1,11 +1,24 @@
 ---
-- name: "Create user {{ item.name }}"
+- name: "Add or remove users"
   ansible.builtin.user:
-    name: "{{ item.name }}"
-    state: present
-    shell: /bin/bash
-    groups: "{{ item.groups }}"
-    append: "yes"
+    name: "{{ user.name }}"
+    state: "{{ user.state | default('present') }}"
+    uid: "{{ user.uid | default(omit) }}"
+    group: "{{ user.group | default(omit) }}"
+    groups: "{{ user.groups | default(omit) }}"
+    shell: "{{ user.shell | default('/bin/bash') }}"
+    comment: "{{ user.comment | default(omit) }}"
+    home: "{{ user.home | default(omit) }}"
+    password: "{{ user.password | password_hash('sha512') | default(omit) }}"
+    createhome: "{{ user.create_home | default(omit) }}"
+    remove: "{{ user.remove | default(omit) }}"
+    generate_ssh_key: "{{ user.generate_ssh_key | default(omit) }}"
+    ssh_key_passphrase: "{{ user.ssh_key_passphrase | default(omit) }}"
+    ssh_key_type: "{{ user.ssh_key_type | default(omit) }}"
+    update_password: on_create
+  with_items: "{{ local_users | default([]) }}"
+  loop_control:
+    loop_var: user
 
 - name: "Add ssh keys for {{ item.name }}"
   ansible.posix.authorized_key:
@@ -15,6 +28,7 @@
   loop: "{{ item.ssh_keys }}"
   loop_control:
     loop_var: sshkey
+  when: item.ssh_keys is defined
 
 - name: check that password expired is disable
   ansible.builtin.command: chage -M 99999 "{{ item.name }}"

@@ -1,31 +1,14 @@
 ---
-- name: "Add Redhat tasks"
-  import_tasks: setup-Redhat.yml
-  when: ansible_os_family == 'Redhat' or ansible_os_family == 'Rocky'
-
-- name: "Add Debian tasks"
-  import_tasks: setup-Debian.yml
-  when: ansible_os_family == 'Debian'
-
-- name: "Set passwordless on sudo"
-  ansible.builtin.lineinfile:
-    path: /etc/sudoers
-    state: present
-    regexp: '^%sudo'
-    line: '%sudo ALL=(ALL) NOPASSWD: ALL'
-    validate: '/usr/sbin/visudo -cf %s'
-  when: global_sudo_nopwd
-
 - name: "Ensure all groups exists"
   ansible.builtin.group:
     name: "{{ item }}"
     state: present
   with_items:
-    - "{{ local_groups }}"
+    - "{{ local_groups | default([]) }}"
   when: local_groups is defined
 
 - name: "Ensure all users exists"
   ansible.builtin.include_tasks: add_user.yml
   with_items:
-    - "{{ local_users }}"
+    - "{{ local_users | default([]) }}"
   when: local_users is defined
