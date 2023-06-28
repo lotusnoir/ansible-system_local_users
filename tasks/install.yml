@@ -1,8 +1,6 @@
 ---
 - name: "Ensure all groups exists"
-  ansible.builtin.group:
-    name: "{{ item }}"
-    state: present
+  ansible.builtin.include_tasks: add_group.yml
   with_items:
     - "{{ local_groups | default([]) }}"
   when: local_groups is defined

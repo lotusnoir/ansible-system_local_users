@@ -10,11 +10,12 @@
     comment: "{{ user.comment | default(omit) }}"
     home: "{{ user.home | default(omit) }}"
     password: "{{ user.password | password_hash('sha512') | default(omit) }}"
-    createhome: "{{ user.create_home | default(omit) }}"
+    create_home: "{{ user.create_home | default(omit) }}"
     remove: "{{ user.remove | default(omit) }}"
     generate_ssh_key: "{{ user.generate_ssh_key | default(omit) }}"
     ssh_key_passphrase: "{{ user.ssh_key_passphrase | default(omit) }}"
     ssh_key_type: "{{ user.ssh_key_type | default(omit) }}"
+    system: "{{ user.system | default(omit) }}"
     update_password: on_create
   with_items: "{{ local_users | default([]) }}"
   loop_control:

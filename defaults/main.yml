@@ -1,6 +1,8 @@
 ---
 #local_groups:
-#  - sudo
+#  - name: sudo
+#    gid: 1661
+#    system: true
 #
 #local_users:
 #  - name: "testuser2"
