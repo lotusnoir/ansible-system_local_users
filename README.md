@@ -27,6 +27,18 @@ See [variables](/defaults/main.yml) for more details.
           gather_facts: true
           roles:
             - role: ansible-system_local_users
+          vars:
+            local_groups:
+              - name: "titi"
+                system: true
+
+            local_users:
+              - name: "titi"
+                shell: "/usr/sbin/nologin"
+                home: /tmp/titi
+                create_home: true
+                system: true
+
 
 
 ## License

@@ -9,7 +9,7 @@
     shell: "{{ user.shell | default('/bin/bash') }}"
     comment: "{{ user.comment | default(omit) }}"
     home: "{{ user.home | default(omit) }}"
-    password: "{{ user.password | password_hash('sha512') | default(omit) }}"
+    password: "{{ user.password | default(omit) | password_hash('sha512') | default(omit) }}"
     create_home: "{{ user.create_home | default(omit) }}"
     remove: "{{ user.remove | default(omit) }}"
     generate_ssh_key: "{{ user.generate_ssh_key | default(omit) }}"
