@@ -4,11 +4,6 @@
   become: true
   any_errors_fatal: true
 
-  tasks:
-    - name: Include role
-      ansible.builtin.include_role:
-        name: ansible-system_local_users
-
   vars:
     local_groups:
       - name: "titi"
@@ -20,3 +15,8 @@
         home: /tmp/titi
         create_home: true
         system: true
+
+  tasks:
+    - name: Include role
+      ansible.builtin.include_role:
+        name: ansible-system_local_users
