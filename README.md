@@ -22,6 +22,7 @@
 ## Description
 
 Configure local system users
+
 ## Requirements
 
 none
@@ -51,7 +52,6 @@ See [variables](/defaults/main.yml) for more details.
                 home: /tmp/titi
                 create_home: true
                 system: true
-
 
 
 ## License
